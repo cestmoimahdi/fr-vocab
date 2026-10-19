@@ -141,20 +141,6 @@ function App() {
     setFeedback(null);
   }
 
-  function chooseNextTarget() {
-    if (placedObjects.length === 0) return;
-    const randomIndex = Math.floor(Math.random() * placedObjects.length);
-    const next = placedObjects[randomIndex];
-    setTarget(next);
-    playQuestion(next);
-  }
-
-  function playQuestion(object) {
-    if (!object.question) return;
-    const audio = new Audio(object.question);
-    audio.play();
-  }
-
   async function enterAR() {
     setArError(null);
     setIsEnteringAR(true);
