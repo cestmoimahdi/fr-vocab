@@ -8,12 +8,8 @@ import "./styles.css";
 const xrStore = createXRStore();
 
 function App() {
-  // Objects currently inside the AR world
   const [placedObjects, setPlacedObjects] = useState([]);
-
-  // Object currently selected
   const [selectedObject, setSelectedObject] = useState(null);
-
   const [learningMode, setLearningMode] = useState(false);
   const [target, setTarget] = useState(null);
   const [score, setScore] = useState(0);
@@ -157,27 +153,6 @@ function App() {
     if (!object.question) return;
     const audio = new Audio(object.question);
     audio.play();
-  }
-
-  function checkLearningAnswer(object) {
-    if (!target) return;
-    if (object.id === target.id) {
-      setScore((current) => current + 1);
-      setFeedback({
-        type: "correct",
-        text: "Correct!",
-      });
-      playAudio(object, "question");
-      setTimeout(() => {
-        setFeedback(null);
-        chooseNextTarget();
-      }, 1800);
-    } else {
-      setFeedback({ type: "wrong", text: "Try again!" });
-      setTimeout(() => {
-        setFeedback(null);
-      }, 1200);
-    }
   }
 
   async function enterAR() {
